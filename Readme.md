@@ -25,7 +25,7 @@ Usage of DELETE: `$curl -X DELETE --data "<KEY>" 127.0.0.1:8080`
 	
 	
 
-# For Instance,
+## For Instance,
 
 	$curl -X GET --data "1" 127.0.0.1:8080
 	
