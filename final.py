@@ -19,27 +19,31 @@ class ServiceHandler(BaseHTTPRequestHandler):
 		self.end_headers()
 		return temp
 		
-    ###############
-    #VIEW AND LIST#
-    ###############
-    #GET method defination
+    	######
+	#LIST#
+	######
+	#GET Method Defination
 	def do_GET(self):
+		#defining all the headers
+		self.send_response(200)
+		self.send_header('Content-type','text/json')
+		self.end_headers()
+		#prints all the keys and values of the json file
+		self.wfile.write(json.dumps(data).encode())
+		
+    	######
+    	#VIEW#
+    	######
+    	#VIEW method defination
+	def do_VIEW(self):
 		#dict var. for pretty print
 		display = {}
 		temp = self._set_headers()
-		######
-		#VIEW#
-		######
 		#check if the key is present in the dictionary
 		if temp in data:
 			display[temp] = data[temp]
+			#print the keys required from the json file
 			self.wfile.write(json.dumps(display).encode())
-		######
-		#LIST#
-		######
-		#prints all the keys and values of the json file
-		elif temp == 'all':
-			self.wfile.write(json.dumps(data).encode())
 		else:
 			error = "NOT FOUND!"
 			self.wfile.write(bytes(error,'utf-8'))
